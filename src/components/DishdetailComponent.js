@@ -37,14 +37,15 @@ class DishDetail extends Component{
     }
 
     renderComment(commentt){
-        let options = { year: 'numeric', month: 'short', day: 'numeric' };
+        
         if(commentt != null){
             return  commentt.map( (com) => {
                 return(                    
                         <ul key={com.id} className="list-unstyled">
                             <li>
                             <p>{com.comment}</p>                            
-                            <p>--{com.author},<span>{new Date(com.date).toLocaleDateString("en-US", options)}</span></p>
+                            <p>--{com.author},<span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}
+                            ).format(new Date(Date.parse(com.date)))}</span></p>
                             </li>                            
                         </ul>   
                 );
@@ -60,8 +61,8 @@ class DishDetail extends Component{
     render(){
 
         return(
-           <div>
-               {this.renderDish(this.props.selectedDish)}   
+           <div className="container">
+               {this.renderDish(this.props.dish)}   
            </div>                           
            
         );
