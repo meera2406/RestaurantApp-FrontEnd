@@ -23,6 +23,7 @@ class Contact extends Component {
         }
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleInputChange=this.handleInputChange.bind(this);
+        this.handleBlur=this.handleBlur.bind(this);
     }
 
     handleInputChange(event) {
@@ -53,7 +54,7 @@ class Contact extends Component {
             telnum : '',
             email : ''
         }
-        if(this.state.firstname.touched && firstname.length <3)
+        if(this.state.touched.firstname && firstname.length <3)
         errors.firstname = 'First Name should be>=3 characters';
         else if (this.state.touched.firstname && firstname.length > 10)
         errors.firstname = 'First Name should be <= 10 characters';
