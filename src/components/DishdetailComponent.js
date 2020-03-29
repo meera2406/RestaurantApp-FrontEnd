@@ -20,7 +20,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                     );                              
     }
 
-    function RenderComment({comments}){
+    function RenderComment({comments,addComment,dishId}){
         if(comments!= null)
         return(
             <div className="col-12 col-md-5 m-1">
@@ -36,7 +36,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                          );
                      })}
                  </ul>
-                 <CommentForm />
+                 <CommentForm dishId={dishId} addComment={addComment}/>
             </div> 
         );
         else
@@ -61,9 +61,8 @@ const minLength = (len) => (val) => val && (val.length >= len);
               });
           }
           handleSubmit(values) {
-            console.log("Current State is : " + JSON.stringify(values));
-            alert("Current State is : " + JSON.stringify(values));
-            //event.preventDefault();
+              this.toggleModal();
+              this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
         }
         render() {
             return(
@@ -105,11 +104,11 @@ const minLength = (len) => (val) => val && (val.length >= len);
                              /></Col>
                          </Row>
                          <Row >
-                         <Label md={12} htmlFor="feedback" >Comment</Label>
+                         <Label md={12} htmlFor="comment" >Comment</Label>
                          </Row>
                          <Row >
                          <Col >
-                             <Control.textarea model=".feedback" id="feedback" name="feeddback" rows="6"
+                             <Control.textarea model=".comment" id="comment" name="comment" rows="6"
                              className="form-control" />
                              </Col>
                          </Row>
@@ -141,7 +140,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                  <h3>{props.dish.name}</h3><hr />
                 </div>         
                  <RenderDish dish={props.dish} />
-                 <RenderComment comments={props.comments} />
+                 <RenderComment comments={props.comments} addComment={props.addComment} dishId={props.dish.id} />
                  </div>
              </div>
          );
