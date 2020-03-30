@@ -22,7 +22,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                     );                              
     }
 
-    function RenderComment({comments,addComment,dishId}){
+    function RenderComment({comments,postComment,dishId}){
         if(comments!= null)
         return(
             <div className="col-12 col-md-5 m-1">
@@ -38,7 +38,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                          );
                      })}
                  </ul>
-                 <CommentForm dishId={dishId} addComment={addComment}/>
+                 <CommentForm dishId={dishId} postComment={postComment}/>
             </div> 
         );
         else
@@ -64,7 +64,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
           }
           handleSubmit(values) {
               this.toggleModal();
-              this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+              this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         }
         render() {
             return(
@@ -160,7 +160,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                  <h3>{props.dish.name}</h3><hr />
                 </div>         
                  <RenderDish dish={props.dish} />
-                 <RenderComment comments={props.comments} addComment={props.addComment} dishId={props.dish.id} />
+                 <RenderComment comments={props.comments} postComment={props.postComment} dishId={props.dish.id} />
                  </div>
              </div>
          );
